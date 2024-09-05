@@ -7,18 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Astrotomic\Translatable\Translatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Translatable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    public $translatedAttributes = ['name',];
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
