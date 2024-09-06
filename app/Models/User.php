@@ -22,6 +22,10 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'username',
+        'role_id',
+        'last_seen',
+        'profile_photo'
     ];
 
     /**
@@ -43,4 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+    public function hasPermission($key)
+    {
+        return $this->role->permission->contains('key', $key);
+    }
+
 }
