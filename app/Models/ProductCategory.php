@@ -5,13 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class ProductCategory extends Model
 {
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, Sluggable;
 
     public $translatedAttributes = ['name',];
     protected $fillable = ['slug' , 'cover', 'status'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function status()
     {

@@ -154,5 +154,5 @@ return [
     | a separate model's property, just set it here.
     |
      */
-    'translations_wrapper' => null,
+    'translations_wrapper' => 'translations',
 ];
