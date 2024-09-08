@@ -22,7 +22,6 @@ class ProductCategory extends Model
             ]
         ];
     }
-
     public function status()
     {
         return $this->status ? 'Active' : 'Inactive';
@@ -56,6 +55,5 @@ class ProductCategory extends Model
     {
         return $this->hasMany(Product::class);
     }
-
 
 }

@@ -9,7 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Faker\Factory;
 
 class UserSeeder extends Seeder
 {
@@ -31,5 +31,27 @@ class UserSeeder extends Seeder
         $role->save();
         $role->name = 'Admin';
         $role->save();
+
+        $faker = Factory::create();
+
+        $role = Role::where('key','user')->first()->id;
+
+        for ($i = 1; $i <= 100; $i++) {
+            $users[] = [
+                'username'                  => $faker->unique()->username,
+                'email'                  => $faker->unique()->email,
+                'email_verified_at'           =>now(),
+                'password'                 => Hash::make('123123'),
+                'remember_token'              =>  'Str::random(10)',
+                'role_id'   => $role,
+                'last_seen'              => null,
+            ];
+        }
+
+        $chunks = array_chunk($users, 100);
+        foreach ($chunks as $chunk) {
+            User::insert($chunk);
+        }
+        
     }
 }
