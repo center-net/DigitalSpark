@@ -24,9 +24,14 @@
 			<div class="container-fluid">
 				@yield('page-header')
 				@yield('content')
+				</div>
+			<!-- Container closed -->
+		</div>
+		<!-- main-content closed -->
 				@include('backend.layouts.sidebar')
 				@include('backend.layouts.models')
             	@include('backend.layouts.footer')
 				@include('backend.layouts.footer-scripts')	
+
 	</body>
 </html>

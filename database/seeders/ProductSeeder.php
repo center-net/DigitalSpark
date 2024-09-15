@@ -20,21 +20,25 @@ class ProductSeeder extends Seeder
 
         $categories = ProductCategory::whereNotNull('parent_id')->pluck('id');
 
-        for ($i = 1; $i <= 100; $i++) {
-                $clothes = new Product();
-                $clothes->slug                  = $faker->unique()->slug(2, true);
-                $clothes->price                 = $faker->numberBetween(5, 200);
-                $clothes->quantity              = $faker->numberBetween(10, 100);
-                $clothes->product_category_id   = $categories->random();
-                $clothes->featured              = rand(0, 1);
-                $clothes->status                = true;
-                $clothes->save();
-                
+        for ($i = 1; $i <= 1000; $i++) {
+            $products[] = [
+
+                'model'                  => $faker->ean13(),
+                'slug'                  => $faker->unique()->slug(2, true),
+                'price'                 => $faker->numberBetween(5, 200),
+                'quantity'              => $faker->numberBetween(10, 100),
+                'product_category_id'   => $categories->random(),
+                'featured'              => rand(0, 1),
+                'status'                => true,
+                'created_at'            => now(),
+                'updated_at'            => now(),
+            ];
         }
 
-            $clothes->name = $faker->sentence(2, true);
-            $clothes->description = $faker->paragraph;
-            $clothes->save();
+        $chunks = array_chunk($products, 100);
+        foreach ($chunks as $chunk) {
+            Product::insert($chunk);
+        }
 
     }
 }

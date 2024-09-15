@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++) {
             $users[] = [
                 'username'                  => $faker->unique()->username,
+                'phone'                  => $faker->unique()->e164PhoneNumber(),
                 'email'                  => $faker->unique()->email,
                 'email_verified_at'           =>now(),
                 'password'                 => Hash::make('123123'),
@@ -48,7 +49,7 @@ class UserSeeder extends Seeder
             ];
         }
 
-        $chunks = array_chunk($users, 100);
+        $chunks = array_chunk($users, 30);
         foreach ($chunks as $chunk) {
             User::insert($chunk);
         }

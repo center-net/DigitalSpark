@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Product extends Model
 {
     use HasFactory, Translatable, Sluggable;
 
     public $translatedAttributes = ['name','description'];
-    protected $fillable = ['slug' , 'price','quantity' , 'product_category_id','featured' , 'status'];
+    protected $fillable = ['slug' , 'price','quantity' , 'product_category_id','featured' , 'status','model'];
 
     public function sluggable(): array
     {

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('locale')->index();
             $table->string('name');
+            $table->string('address');
             $table->unique(['user_id','locale']);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });

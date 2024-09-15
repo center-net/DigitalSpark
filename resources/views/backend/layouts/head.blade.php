@@ -18,4 +18,5 @@
 <!--- Style css -->
 <link href="{{URL::asset('assets/backend/css/style.css')}}" rel="stylesheet"> 
 @endif
+@livewireStyles
 @yield('css')

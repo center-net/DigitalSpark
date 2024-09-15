@@ -27,6 +27,12 @@ class ProductCategory extends Model
         return $this->status ? 'Active' : 'Inactive';
     }
 
+
+    public function getParentNameAttribute(): string
+    {
+        return $this->parent != null ? $this->parent->name : '-';
+    }
+
     public function parent()
     {
         return $this->hasOne(ProductCategory::class, 'id', 'parent_id');

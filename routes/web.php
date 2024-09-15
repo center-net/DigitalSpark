@@ -20,9 +20,22 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
     ],
     function () {
-        Route::get('/', function () {
-            return view('welcome');
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::post('/custom/livewire/update', $handle);
         });
+
+        Route::group(['prefix' => 'admin', 'sa' => 'admin'], function () {
+            Route::view('/administrator', 'backend.empty')->name('admin.administrator');
+            Route::view('/user', 'backend.users.component')->name('admin.users');
+            Route::view('/BillinCategories', 'backend.billing-categories.component')->name('admin.billing-categories');
+            Route::view('/products', 'backend.products.component')->name('admin.product');
+            Route::view('/ProductCategories', 'backend.product-categories.component')->name('admin.product-categories');
+            Route::view('/rols', 'backend.rols.component')->name('admin.rols');
+            Route::view('/safes', 'backend.safes.component')->name('admin.safe');
+            Route::view('/tags', 'backend.tags.component')->name('admin.tag');
+        });
+
+        Route::view('/', 'welcome');
         Auth::routes();
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

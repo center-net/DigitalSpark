@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
 
         $role = new Role();
         $role->key = 'administrator';
-        $role->color = 'bg-red-700 text-white';
+        $role->color = 'success';
         $role->save();
         $role->name = 'Administrator';
         $role->save();
@@ -38,14 +38,14 @@ class RoleSeeder extends Seeder
 
         $role = new Role();
         $role->key = 'user';
-        $role->color = 'bg-gray-700 text-white';
+        $role->color = 'warning';
         $role->save();
         $role->name = 'User';
         $role->save();
 
         $role = new Role();
         $role->key = 'banned';
-        $role->color = 'bg-gray-700 text-white';
+        $role->color = 'danger';
         $role->save();
         $role->name = 'Banned';
         $role->save();
